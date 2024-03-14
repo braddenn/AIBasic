@@ -1,0 +1,60 @@
+=============== Outline ======================
+AIBasic
+	user (config)
+		| Events - from the OS
+		| NeuralNet
+
+	User: menu_return Step -> sim_map.menu_step()
+		simmap.neural_net_step(...get_sensor_data (hills)) // to get current hills list
+
+Class -> defs
+	new_frame - sets size of frame
+		sets up screen, menu, hills
+	WHY? get_neural_net.sensor_data()  not used
+	neural_net_step - needs sensor data - who calls this?
+	defs save, load, help // not implemented
+	get_screen - not used, deleted
+	
+============   AIBasic Files   ============================
+subdirectories:
+	classroom - slides and documents describing AI
+	results - paramenter output files of recent executions
+
+AIBasicOutline.txt - this file
+	
+Config file
+	config-*.jsn       ## configuration and operations
+	Config file is loaded from the command line.
+	NOTE: config file name must be set by the user.
+
+pygame - imported library to support keyboard events.
+
+AIBasic.py - main: starts in this module. 
+	NOTE: Execution starts here (no main). 
+	The command line perameter is the name of a user created config file.
+		Optionally uses print statements enabled with the 'debug' option.
+	calls: user
+	
+class NeuralNet in NNBasic.py
+	started by: Class User
+	command line: parameter is the name of the config file.
+	function - computes the next step.
+
+class User in user.py
+	started by: AIBasic -- main
+	function - Start classes, respond to user keys, manage all activity.
+	init parms - config filename
+	keyboard events all handled locally:
+		Cont    - "c" continue execution if halted
+		Debug	- "d" show code at some steps via DEBUG code setting
+		Exit    - "x" or ^c to exit the simulation
+		File    - "f filename", saves weights and reference value to a file
+		Help	- "h" stop/halt: when halted shows this list of commands
+		Input   - "i" prompts for input and reference values
+		Load    - "l filename", load a file of weights and reference
+		Plot    - "p" plot the output error while running
+		Rand	- "r" set weights to random values
+		Step    - "s" stop if running, go one AI step when stopped
+		Trace   - "t" show the output error at each step
+		Weights = "w" show the current weights
+
